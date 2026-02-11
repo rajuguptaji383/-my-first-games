@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>नंबर पहचानो गेम प्रो</title>
+    <style>
+        body { background: linear-gradient(135deg, #1e3c72, #2a5298); color: white; font-family: sans-serif; text-align: center; height: 100vh; display: flex; flex-direction: column; justify-content: center; margin: 0; }
+        .card { background: rgba(255, 255, 255, 0.1); padding: 30px; border-radius: 20px; box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); backdrop-filter: blur(4px); margin: auto; width: 80%; max-width: 400px; border: 1px solid rgba(255, 255, 255, 0.18); }
+        input { padding: 12px; border-radius: 10px; border: none; width: 80%; margin-bottom: 20px; font-size: 18px; text-align: center; color: #333; }
+        button { padding: 12px 30px; background: #ff9800; border: none; border-radius: 10px; color: white; font-weight: bold; cursor: pointer; font-size: 18px; box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3); }
+        button:active { transform: scale(0.98); }
+        #message { font-size: 20px; margin-top: 20px; font-weight: bold; min-height: 1.5em; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>नंबर पहचानो 🎮</h1>
+        <p>1 से 10 के बीच एक नंबर गेस करो</p>
+        <input type="number" id="guessInput" placeholder="यहाँ नंबर लिखें..." min="1" max="10">
+        <br>
+        <button onclick="checkGuess()">जांच करें</button>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        let targetNumber = Math.floor(Math.random() * 10) + 1;
+        function checkGuess() {
+            let userGuess = document.getElementById("guessInput").value;
+            let msg = document.getElementById("message");
+            if (!userGuess) { msg.innerHTML = "कृपया एक नंबर डालें!"; return; }
+            if (userGuess == targetNumber) {
+                msg.innerHTML = "🏆 शानदार! आपने सही पहचाना।";
+                msg.style.color = "#4caf50";
+                setTimeout(() => { location.reload(); }, 3000);
+            } else {
+                msg.innerHTML = userGuess < targetNumber ? "थोड़ा बड़ा नंबर सोचें! ⬆️" : "थोड़ा छोटा नंबर सोचें! ⬇️";
+                msg.style.color = "#ffeb3b";
+            }
+        }
+    </script>
+</body>
+</html>
