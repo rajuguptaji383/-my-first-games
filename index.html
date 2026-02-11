@@ -1,41 +1,38 @@
+
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="UTF-8">
+    <title>WIN-ZO</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>नंबर पहचानो गेम प्रो</title>
     <style>
-        body { background: linear-gradient(135deg, #1e3c72, #2a5298); color: white; font-family: sans-serif; text-align: center; height: 100vh; display: flex; flex-direction: column; justify-content: center; margin: 0; }
-        .card { background: rgba(255, 255, 255, 0.1); padding: 30px; border-radius: 20px; box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); backdrop-filter: blur(4px); margin: auto; width: 80%; max-width: 400px; border: 1px solid rgba(255, 255, 255, 0.18); }
-        input { padding: 12px; border-radius: 10px; border: none; width: 80%; margin-bottom: 20px; font-size: 18px; text-align: center; color: #333; }
-        button { padding: 12px 30px; background: #ff9800; border: none; border-radius: 10px; color: white; font-weight: bold; cursor: pointer; font-size: 18px; box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3); }
-        button:active { transform: scale(0.98); }
-        #message { font-size: 20px; margin-top: 20px; font-weight: bold; min-height: 1.5em; }
+        body { background: #0a0a0a; color: #fff; text-align: center; font-family: 'Arial Black', sans-serif; padding-top: 80px; }
+        .winzo-box { border: 4px solid #f44336; padding: 40px 20px; margin: auto; width: 280px; border-radius: 30px; background: #1a1a1a; box-shadow: 0 0 20px #f44336; }
+        h1 { font-size: 45px; color: #f44336; margin: 0 0 20px 0; text-shadow: 2px 2px #fff; }
+        input { width: 80px; padding: 15px; font-size: 22px; border-radius: 10px; border: none; text-align: center; background: #333; color: #fff; }
+        button { padding: 15px 30px; background: #f44336; color: #fff; border: none; font-weight: bold; border-radius: 10px; margin-top: 20px; font-size: 20px; cursor: pointer; text-transform: uppercase; }
+        #result { margin-top: 25px; font-size: 22px; font-weight: bold; color: #ffeb3b; }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h1>नंबर पहचानो 🎮</h1>
-        <p>1 से 10 के बीच एक नंबर गेस करो</p>
-        <input type="number" id="guessInput" placeholder="यहाँ नंबर लिखें..." min="1" max="10">
+    <div class="winzo-box">
+        <h1>WIN-ZO 🎮</h1>
+        <p style="color: #aaa;">नंबर गेस करो और जीतो!</p>
+        <input type="number" id="guess" placeholder="?">
         <br>
-        <button onclick="checkGuess()">जांच करें</button>
-        <p id="message"></p>
+        <button onclick="play()">PLAY</button>
+        <p id="result"></p>
     </div>
-
     <script>
-        let targetNumber = Math.floor(Math.random() * 10) + 1;
-        function checkGuess() {
-            let userGuess = document.getElementById("guessInput").value;
-            let msg = document.getElementById("message");
-            if (!userGuess) { msg.innerHTML = "कृपया एक नंबर डालें!"; return; }
-            if (userGuess == targetNumber) {
-                msg.innerHTML = "🏆 शानदार! आपने सही पहचाना।";
-                msg.style.color = "#4caf50";
-                setTimeout(() => { location.reload(); }, 3000);
-            } else {
-                msg.innerHTML = userGuess < targetNumber ? "थोड़ा बड़ा नंबर सोचें! ⬆️" : "थोड़ा छोटा नंबर सोचें! ⬇️";
-                msg.style.color = "#ffeb3b";
+        let secret = Math.floor(Math.random() * 10) + 1;
+        function play() {
+            let n = document.getElementById("guess").value;
+            let res = document.getElementById("result");
+            if(n == secret) { 
+                res.innerHTML = "🏆 YOU WIN! 🏆"; 
+                res.style.color="#4caf50"; 
+            } else { 
+                res.innerHTML = n < secret ? "THODA UP ⬆️" : "THODA DOWN ⬇️"; 
+                res.style.color="#ffeb3b";
             }
         }
     </script>
